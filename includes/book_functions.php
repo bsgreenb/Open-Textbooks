@@ -93,7 +93,7 @@ function next_dropdowns_query($where_arr) //queries for the next dropdown based 
 	return $select . $from_and_where . $order_by;
 }
 
-function load_books_from_row($Books, $row) //Updates Books_and_sales with a row from the database.
+function load_books_from_row($Books, $row) //Updates Books with a row from the database.
 {
 	if ($row['ISBN'])
 	{
@@ -113,7 +113,7 @@ function load_items_from_array($arr)
 {	
 	$items_arr = array();
 	
-	$fields_arr = array('Title', 'Data_Source', 'Item_ID', 'ISBN', 'Authors', 'Edition', 'Year', 'Publisher', 'Amazon_Thumb_URL', 'Necessity', 'Comments', 'Bookstore_Price', 'New_Price', 'Used_Price', 'New_Rental_Price', 'Used_Rental_Price');
+	$fields_arr = array('Title', 'Item_ID', 'ISBN', 'Authors', 'Edition', 'Year', 'Publisher', 'Necessity', 'Comments', 'Bookstore_Price', 'New_Price', 'Used_Price', 'New_Rental_Price', 'Used_Rental_Price');
 
 	foreach ($fields_arr as $field_name)
 	{
@@ -137,7 +137,7 @@ function class_items_query($Class_IDs) //takes array of Class_IDs
 	Courses_Cache.Course_ID, Courses_Cache.Course_Value, Courses_Cache.Course_Code,
 	Classes_Cache.Class_Value, Classes_Cache.Class_Code, Classes_Cache.Instructor, Classes_Cache.Class_ID,
 	Class_Items_Cache.Class_Items_Cache_ID, Class_Items_Cache.Bookstore_Price, Class_Items_Cache.New_Price, Class_Items_Cache.Used_Price, Class_Items_Cache.New_Rental_Price, Class_Items_Cache.Used_Rental_Price, Class_Items_Cache.Necessity, Class_Items_Cache.Comments,  Class_Items_Cache.Class_ID IS NULL AS no_class_item, Class_Items_Cache.Item_ID IS NULL as noitems,
-	Items.Item_ID, Items.ISBN, Items.Title, Items.Edition, Items.Authors, Items.Year, Items.Publisher, Items.Amazon_Thumb_URL, Items.Data_Source
+	Items.Item_ID, Items.ISBN, Items.Title, Items.Edition, Items.Authors, Items.Year, Items.Publisher 
 	FROM Campuses
 	INNER JOIN Bookstores 
 	 ON (Bookstores.Bookstore_ID = Campuses.Bookstore_ID) 
