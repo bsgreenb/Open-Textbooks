@@ -147,9 +147,9 @@ else if (!isset($_GET['section']))
 				
 				while ($row = mysql_fetch_assoc($result))
 				{
-					$data[$row[$next_id]] = array('ty_id' => $row[$next_id], 'name' => $row[$next_name]);
+					$data[$row[$next_id]] = array('id' => $row[$next_id], 'name' => $row[$next_name]);
 					
-					if ($row['Instructor'])
+					if (isset($row['Instructor']) && $row['Instructor'])
 					{
 						$data[$row[$next_id]]['instructor'] = $row['Instructor'];
 					}
