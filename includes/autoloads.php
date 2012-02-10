@@ -12,7 +12,6 @@ require_once($root . '/../includes/proxy_config.php');
 require_once($root . '/../includes/book_functions.php');
 require_once($root . '/../includes/bookstore_functions.php');
 require_once($root . '/../includes/db_functions.php');
-require_once($root . '/../includes/display_functions.php');
 require_once($root . '/../includes/math_functions.php');
 require_once($root . '/../includes/parsing_functions.php');
 require_once($root . '/../includes/url_functions.php');
