@@ -684,7 +684,7 @@ function get_classes_and_items_from_mbs($valuesArr)
 	{
 		if (!isset($valuesArr['Term_ID']) || !isset($dd_state))
 		{
-			if (!isset($btnRegular) && !$btnRegular)
+			if (!isset($btnRegular) || !$btnRegular)
 			{
 				//initial terms request to establish a session
 				$options = array(CURLOPT_URL => $mbs_url, 
@@ -744,7 +744,7 @@ function get_classes_and_items_from_mbs($valuesArr)
 		{	
 			@$doc->loadHTML($response); //because their HTML is malformed.
 			
-			if ($dd_state != 4) //not a class-item response
+			if (!isset($dd_state) || $dd_state != 4) //not a class-item response
 			{
 				$form_tag = $doc->getElementsByTagName('form');
 				if ($form_tag->length == 0)
