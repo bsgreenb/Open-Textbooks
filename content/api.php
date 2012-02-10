@@ -2,7 +2,7 @@
 
 date_default_timezone_set('GMT');
 
-$first_start = microtime(true)
+$first_start = microtime(true);
 
 $user_token = time() . rand(); //globalled in url_functions
 
