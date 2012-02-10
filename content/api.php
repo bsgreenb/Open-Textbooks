@@ -6,7 +6,6 @@ $first_start = microtime(true)
 
 $user_token = time() . rand(); //globalled in url_functions
 
-
 $json = array();
 $json['data'] = array();
 
@@ -175,7 +174,7 @@ else
 	}
 	else
 	{
-		$Books_and_sales = array();
+		$Books = array();
 		
 		$query = class_items_query(array($section_id), $campus_id);
 		
@@ -222,10 +221,10 @@ else
 				
 				if ($row['Item_ID']) //it has at least one item
 				{
-					//So, loop the books_and_sales into the array
+					//So, loop the books into the array
 					while ($row = mysql_fetch_assoc($result))
 					{
-						$Books_and_sales = load_books_and_sales_from_row($Books_and_sales, $row);
+						$Books = load_books_from_row($Books, $row);
 					}
 					
 					//Load our ish into JSON and output...
