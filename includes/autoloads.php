@@ -6,6 +6,7 @@ $root = $_SERVER['DOCUMENT_ROOT'];
 
 //config..
 require_once($root . '/../includes/db_config.php');
+require_once($root . '/../includes/proxy_config.php');
 
 //includes..
 require_once($root . '/../includes/book_functions.php');

@@ -216,10 +216,7 @@ function get_classes_and_items_from_neebo($valuesArr)
 				
 				foreach ($info as $subject)
 				{
-					//to get it working, need to fix this part...
 					$subject = explode(':', $subject);
-					
-					//need to properly do this, probably a switch, to get the stuff we want..  think about it.
 					
 					$key = str_replace('<strong>', '', $subject[0]);
 
@@ -267,7 +264,7 @@ function get_classes_and_items_from_neebo($valuesArr)
 
 function get_classes_and_items_from_follett($valuesArr)
 {	
-	//We hardcode Program_Value and Campus_Value in the Campuses table because they are campus-specific and pretty much static.  DIvision_Value varies and is sometimes like a higher level department, so we give it it's own table..
+	//We hardcode Program_Value and Campus_Value in the Campuses table because they are campus-specific and pretty much static.  Division_Value varies and is sometimes like a higher level department, so we give it it's own table..
 	
 	$returnArray = array();
 	$url = $valuesArr['Fetch_URL'] . 'webapp/wcs/stores/servlet/';
@@ -276,7 +273,7 @@ function get_classes_and_items_from_follett($valuesArr)
 	//We need to set these to empty or spaces appropraitely, because Follet expects them even when they aren't existent. 
 	if (!$valuesArr['Campus_Value'])
 	{
-		//Do all Follett schools have Campus_Values?  Answer: No, some do not.  And in fact, wen they don't have it it's not even sent as a parameter.  To simplify things we just set it as an empty string for those cases..
+		//Do all Follett schools have Campus_Values?  Answer: No, some do not.  And in fact, when they don't have it it's not even sent as a parameter.  To simplify things we just set it as an empty string for those cases..
 		$valuesArr['Campus_Value'] = '';
 	}
 	if (isset($valuesArr['Division_ID']) && !$valuesArr['Division_Value'])
@@ -290,7 +287,7 @@ function get_classes_and_items_from_follett($valuesArr)
 	//Initial request to start the session with follett if we haven't already.. Follett won't let you do anything w/o one... 
 	if (!isset($valuesArr['Class_ID'])) //note that we only need to do this for the dropdowns, not for booklook, which is on a seperate HEOA page which doesn't require a session.
 	{
-		$options = array(CURLOPT_URL => $valuesArr['Storefront_URL'], CURLOPT_HTTPPROXYTUNNEL => true, CURLOPT_PROXY => PROXYMESH_PROXY, CURLOPT_PROXYUSERPWD => PROXYMESH_PROXY_AUTH);
+		$options = array(CURLOPT_URL => $valuesArr['Storefront_URL'], CURLOPT_HTTPPROXYTUNNEL => true, CURLOPT_PROXY => PROXY_1, CURLOPT_PROXYUSERPWD => PROXY_1_AUTH);
 		
 		$response = curl_request($options); //query the main page to pick up the cookies
 		
@@ -351,7 +348,7 @@ function get_classes_and_items_from_follett($valuesArr)
 	}
 	
 	//make the request and reutrn the response
-	$response = curl_request(array(CURLOPT_URL => $url, CURLOPT_REFERER => $referer, CURLOPT_HTTPPROXYTUNNEL => true, CURLOPT_PROXY => PROXYMESH_PROXY, CURLOPT_PROXYUSERPWD => PROXYMESH_PROXY_AUTH));
+	$response = curl_request(array(CURLOPT_URL => $url, CURLOPT_REFERER => $referer, CURLOPT_HTTPPROXYTUNNEL => true, CURLOPT_PROXY => PROXY_1, CURLOPT_PROXYUSERPWD => PROXY_1_AUTH));
 	
 	if ($response)
 	{
@@ -415,7 +412,6 @@ function get_classes_and_items_from_follett($valuesArr)
 			$i = 0; //counter for $items
 			foreach ($results as $resultNode)
 			{
-				//k, so it wont actually get the UL cus thats not a childnode..  we need to get it from nticing its parent.
 				if ($resultNode->nodeName == 'h2')
 				{
 					$necessity = $resultNode->nodeValue;
@@ -746,8 +742,6 @@ function get_classes_and_items_from_mbs($valuesArr)
 		}
 		else
 		{	
-			//update $select_tags here..
-			
 			@$doc->loadHTML($response); //because their HTML is malformed.
 			
 			if ($dd_state != 4) //not a class-item response
@@ -825,8 +819,6 @@ function get_classes_and_items_from_mbs($valuesArr)
 								//build the returnArray based on the select.. then we're good to go.
 								$returnArray = array();
 								
-								//problem is we dont have the $response right..
-								
 								$select = $select_tags->item($mbs_start + $dd_state);
 								
 								
@@ -866,8 +858,6 @@ function get_classes_and_items_from_mbs($valuesArr)
 						}
 						
 						$second_td = $finder->query('.//td[2]', $table_tag)->item(0);
-						
-						//is the problem maybe that its' not always there?
 						
 						$title = $finder->query('.//font', $second_td);
 						
@@ -1205,11 +1195,10 @@ function get_classes_and_items_from_bn($valuesArr)
 	if (!isset($valuesArr['Class_ID']))
 	{
 		//make initialization request if they don't have a session yet...
-		curl_request(array(CURLOPT_URL => $valuesArr['Storefront_URL'], CURLOPT_COOKIESESSION => true, CURLOPT_PROXY => TRUSTED_PROXY, CURLOPT_PROXYUSERPWD => TRUSTED_PROXY_AUTH));
+		curl_request(array(CURLOPT_URL => $valuesArr['Storefront_URL'], CURLOPT_COOKIESESSION => true, CURLOPT_PROXY => PROXY_2, CURLOPT_PROXYUSERPWD => PROXY_2_AUTH));
 		
 		//pt 2 of initialization is requesting the textbook lookup page
-		//$options = array(CURLOPT_URL => $referer, CURLOPT_COOKIESESSION => true);
-		$options = array(CURLOPT_URL => $referer, CURLOPT_PROXY => TRUSTED_PROXY, CURLOPT_PROXYUSERPWD => TRUSTED_PROXY_AUTH);
+		$options = array(CURLOPT_URL => $referer, CURLOPT_PROXY => PROXY_2, CURLOPT_PROXYUSERPWD => PROXY_2_AUTH);
 		
 		$response = curl_request($options);
 		
@@ -1244,8 +1233,7 @@ function get_classes_and_items_from_bn($valuesArr)
 			$url .= 'TextBookProcessDropdownsCmd?campusId='. $valuesArr['Campus_Value'] .'&termId='. $valuesArr['Term_Value'] .'&deptId='. $valuesArr['Department_Value'] .'&courseId='. $valuesArr['Course_Value'] .'&sectionId=&storeId='. $valuesArr['Store_Value'] . '&catalogId=10001&langId=-1&dojo.transport=xmlhttp&dojo.preventCache='. time();
 		}
 		
-		//$options = array(CURLOPT_URL => $url, CURLOPT_REFERER => $referer);
-		$options = array(CURLOPT_URL => $url, CURLOPT_REFERER => $referer, CURLOPT_PROXY => TRUSTED_PROXY, CURLOPT_PROXYUSERPWD => TRUSTED_PROXY_AUTH);
+		$options = array(CURLOPT_URL => $url, CURLOPT_REFERER => $referer, CURLOPT_PROXY => PROXY_2, CURLOPT_PROXYUSERPWD => PROXY_2_AUTH);
 	}
 	else //prepare the class-items query
 	{
@@ -1257,7 +1245,7 @@ function get_classes_and_items_from_bn($valuesArr)
 		$postdata = 'storeId='. $valuesArr['Store_Value'] .'&langId=-1&catalogId=10001&savedListAdded=true&clearAll=&viewName=TBWizardView&removeSectionId=&mcEnabled=N&section_1='. $valuesArr['Class_Value'] .'&numberOfCourseAlready=0&viewTextbooks.x='. $x .'&viewTextbooks.y='. $y .'&sectionList=newSectionNumber';//get the class-book data.
 		
 		//$options = array(CURLOPT_URL => $url .'TBListView', CURLOPT_REFERER => $referer, CURLOPT_POST => true, CURLOPT_POSTFIELDS => $postdata);
-		$options = array(CURLOPT_URL => $url .'TBListView', CURLOPT_REFERER => $referer, CURLOPT_POST => true, CURLOPT_POSTFIELDS => $postdata, CURLOPT_PROXY => TRUSTED_PROXY, CURLOPT_PROXYUSERPWD => TRUSTED_PROXY_AUTH);
+		$options = array(CURLOPT_URL => $url .'TBListView', CURLOPT_REFERER => $referer, CURLOPT_POST => true, CURLOPT_POSTFIELDS => $postdata, CURLOPT_PROXY => PROXY_2, CURLOPT_PROXYUSERPWD => PROXY_2_AUTH);
 	}
 	
 	$response = curl_request($options);
@@ -1553,7 +1541,7 @@ function update_classes_from_bookstore($valuesArr) //$valuesArr is an array of v
 							foreach ($course['Classes'] as $class)
 							{
 								$neebo_query = 'INSERT INTO	Classes_Cache (Course_ID, Class_Code, Class_Value) VALUES ('. $course_id . ', "'. mysql_real_escape_string($class['Class_Code']) . '", "'. mysql_real_escape_string($class['Class_Value']) . '") ON DUPLICATE KEY UPDATE Class_Code=VALUES(Class_Code),Cache_TimeStamp=NOW()';
-								//DO:what about that there instructor?  rui, we grabbing that?  want to get it seperatyely...
+								//DO:what about that there instructor? are we grabbing that?  want to get it seperatyely...
 									//make sure to set default value for when that wont work
 								
 								if (!mysql_query($neebo_query))
@@ -1666,21 +1654,19 @@ function update_class_items_from_bookstore($classValuesArr) //$classValuesArr is
 			}
 			if ($results)
 			{
-				//its not getting items..
 				$Items = array();
 				
 				foreach ($results['items'] as $i => $item)
 				{
 					//Set data source and format the item.. Also add it to $Items for later update.
 					//**make it so it ignores the ones with the bad titles..
-					$exclude = array('As Of Today,No Book Order Has Been Submitted,Pleas,');
+					$exclude = array('As Of Today,No Book Order Has Been Submitted,Pleas,'); #Note that this is their typo, not mine
 					$item = format_item($item);
 					
 					if (!in_array(trim($item['Title']), $exclude) && 
 					(!isset($item['Necessity']) || !$item['Necessity'] || isNecessary($item['Necessity']) || (isset($item['ISBN']) && valid_book_ISBN13($item['ISBN'])))
 					) //we lso require that its either (possibly) required or has an ISBN
 					{
-						$item['Data_Source'] = 'Bookstore';
 						$Items[] = $item;
 					}
 				}
