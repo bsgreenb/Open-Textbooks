@@ -15,7 +15,7 @@ function next_dropdowns_query($where_arr) //queries for the next dropdown based 
 	
 	//we always select this campus stuf..
 	$select = 'SELECT 
-	Campuses.Campus_ID, Campuses.Location, Campuses.Campus_Message,
+	Campuses.Campus_ID, Campuses.Location, 
 	Campus_Names.Campus_Name, Campuses.Program_Value, Campuses.Campus_Value,
 	Bookstores.Bookstore_ID, Bookstores.Storefront_URL, Bookstores.Fetch_URL, Bookstores.Store_Value, Bookstores.Follett_HEOA_Store_Value, Bookstores.Multiple_Campuses,
 	Bookstore_Types.Bookstore_Type_Name, 
