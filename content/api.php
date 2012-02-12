@@ -1,5 +1,15 @@
 <?php
 
+//An API for the course-book data.  Give it sequential urls, like this:
+// api.php?campus=N
+// api.php?campus=N&term=N
+// api.php?campus=N&term=N&division=N
+// api.php?campus=N&term=N&division=N&dept=N
+// api.php?campus=N&term=N&division=N&dept=N&course=N
+// api.php?campus=N&term=N&division=N&dept=N&course=N&section=N
+//
+//..where N is an ID.  Note that the division always has to be provided. even if the system in question doesn't have divisions, the bookstore_functions code creates a placeholder
+
 require_once('../includes/autoloads.php');
 
 date_default_timezone_set('GMT');
