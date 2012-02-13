@@ -3,7 +3,7 @@ Copyright (C) 2012 Ben Greenberg -- see LICENSE.txt for details
 
 See http://textyard.com/blog/ for background on this project and its motivations
 
-## Installation/Configuration<
+## Installation/Configuration
 
 Installing is as simple as downloading the code to your webserver, and importing the structure+data .sql file.  This file has around 1,000 working schools for you to begin with.  Note that the Follett bookstore schools will require some extra work to start getting complete data from (see Documentation).  You can add any of the missing 2-3k schools with online bookstores by following the steps in the documentation Wiki.
 
