@@ -3,7 +3,7 @@ Copyright (C) 2012 Ben Greenberg -- see LICENSE.txt for details
 
 See http://textyard.com/blog/ for background on this project and its motivations
 
-<h2>Installation/Configuration</h2>
+## Installation/Configuration<
 
 Installing is as simple as downloading the code to your webserver, and importing the structure+data .sql file.  This file has around 1,000 working schools for you to begin with.  Note that the Follett bookstore schools will require some extra work to start getting complete data from (see Documentation).  You can add any of the missing 2-3k schools with online bookstores by following the steps in the documentation Wiki.
 
@@ -11,11 +11,11 @@ There are two necessary config files for the code to run, db_config.php and prox
 
 You'll see in the content/ folder that I included api.php.  That's a REST API that you can use to verify that the scraping is working correctly.  See the comments at the top of that file for the GET parameters it takes.
 
-##Documentation ==
+## Documentation
 
-See the Wiki which explains clearly how all the scrapers work, and how they avoid the anti-scraping techniques employed by the 6 major bookstore website technologies.  Additionally, it explains how to add new schools for every bookstore type. 
+See the Wiki which explains clearly how all the scrapers work, and how they avoid the anti-scraping techniques employed by the 6 major bookstore website technologies.  Additionally, it explains how to add new schools for every bookstore type. I've also added a section on the legality of the scrapers (IMPORTANT DISCLAIMER: I AM NOT A LAWYER AND I AM NOT RESPONSIBLE FOR YOU FOLLOWING THE LEGAL OPINIONS IN THERE.) 
 
-== Open-Source Volunteering Opportunities ==
+## Open-Source Volunteering Opportunities
 
 There's a lot of ways this project could be improved.  Some of these tasks don't even require coding skill.
 
@@ -24,6 +24,6 @@ There's a lot of ways this project could be improved.  Some of these tasks don't
 * Help keep the scrapers up to date, as the bookstore software changes every couple of years.
 * Find any bugs in the code.  I'm sure there are some, and there are definitely lots of places where the code can be simplified/improved. 
 
-== Contact Info ==
+## Contact Info
 
 Contact me at ben@textyard.com with any questions.  I'm happy to help with whatever!
