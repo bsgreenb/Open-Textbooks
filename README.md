@@ -5,11 +5,11 @@ See http://textyard.com/blog/ for background on this project and its motivations
 
 ## Installation/Configuration
 
-Installing is as simple as downloading the code to your webserver, and importing the structure+data .sql file.  This file has around 1,000 working schools for you to begin with.  Note that the Follett bookstore schools will require some extra work to start getting complete data from (see Documentation).  You can add any of the missing 2-3k schools with online bookstores by following the steps in the documentation Wiki.
+Installing is as simple as downloading the code to your webserver, and importing the structure+data .sql file.  This file has over 1,000 working schools for you to begin with.  Note that the Follett bookstore schools will require some extra work to start getting complete data from (see Documentation).  You can add any of the missing 2-3k schools with online bookstores by following the steps in the documentation Wiki.
 
 There are two necessary config files for the code to run, db_config.php and proxy_config.php.  Both are derived from their respective *_template.php files.  db_config just requires the credentials for logging into your MySQL dataqbase.  proxy_config requires proxies to use for scraping the Follett and Barnes and Nobles, respectively.
 
-You'll see in the content/ folder that I included api.php.  That's a REST API that you can use to verify that the scraping is working correctly.  See the comments at the top of that file for the GET parameters it takes.
+You'll see in the content/ folder that I included api.php.  That's a REST API that you can use to verify that the scraping is working correctly.  See the comments at the top of that file for the GET parameters it takes.  I also included runthrough.php, which runs through the api and outputs any schools where the scrapers are non-functional.
 
 ## Documentation
 
