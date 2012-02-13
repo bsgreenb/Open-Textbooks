@@ -13,7 +13,7 @@ You'll see in the content/ folder that I included api.php.  That's a REST API th
 
 ## Documentation
 
-See the Wiki which explains clearly how all the scrapers work, and how they avoid the anti-scraping techniques employed by the 6 major bookstore website technologies.  Additionally, it explains how to add new schools for every bookstore type. I've also added a section on the legality of the scrapers (IMPORTANT DISCLAIMER: I AM NOT A LAWYER AND I AM NOT RESPONSIBLE FOR YOU FOLLOWING THE LEGAL OPINIONS IN THERE.) 
+See the [Wiki](https://github.com/bsgreenb/Open-Textbooks/wiki) which explains clearly how all the scrapers work, and how they avoid the anti-scraping techniques employed by the 6 major bookstore website technologies.  Additionally, it explains how to add new schools for every bookstore type. I've also added a section on the legality of the scrapers (IMPORTANT DISCLAIMER: I AM NOT A LAWYER AND I AM NOT RESPONSIBLE FOR YOU FOLLOWING THE LEGAL OPINIONS IN THERE.) 
 
 ## Open-Source Volunteering Opportunities
 
