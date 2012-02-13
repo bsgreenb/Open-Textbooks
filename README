@@ -3,7 +3,8 @@ Copyright (C) 2012 Ben Greenberg -- see LICENSE.txt for details
 
 See http://textyard.com/blog/ for background on this project and its motivations
 
-== Installation/Configuration ==
+Installation/Configuration
+--------------------------
 
 Installing is as simple as downloading the code to your webserver, and importing the structure+data .sql file.  This file has around 1,000 working schools for you to begin with.  Note that the Follett bookstore schools will require some extra work to start getting complete data from (see Documentation).  You can add any of the missing 2-3k schools with online bookstores by following the steps in the documentation Wiki.
 
@@ -11,7 +12,7 @@ There are two necessary config files for the code to run, db_config.php and prox
 
 You'll see in the content/ folder that I included api.php.  That's a REST API that you can use to verify that the scraping is working correctly.  See the comments at the top of that file for the GET parameters it takes.
 
-== Documentation ==
+##Documentation ==
 
 See the Wiki which explains clearly how all the scrapers work, and how they avoid the anti-scraping techniques employed by the 6 major bookstore website technologies.  Additionally, it explains how to add new schools for every bookstore type. 
 
