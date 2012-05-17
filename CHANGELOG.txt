@@ -1,0 +1,3 @@
+16-May-2012 by  Samuel Grondahl  <sam@studyhall.com>
+
+    * bookstore_functions.php (get_classes_and_items_from_bn): updated cURL requests such that a session is mantained during each request and cookies are stored in /tmp
