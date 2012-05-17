@@ -1127,13 +1127,13 @@ function get_classes_and_items_from_campushub($valuesArr)
 									$item['ISBN'] = $span->nodeValue;
 									break;
 								case 'book-meta book-copyright':
-									$item['Year'] = str_replace(array(' ', 'Â','Copyright'), '', $span->nodeValue);
+									$item['Year'] = str_replace(array(' ', '\C2','Copyright'), '', $span->nodeValue);
 									break;
 								case 'book-meta book-publisher':
-									$item['Publisher'] = str_replace(array(' ', 'Â','Publisher'), '', $span->nodeValue);
+									$item['Publisher'] = str_replace(array(' ', '\C2','Publisher'), '', $span->nodeValue);
 									break;
 								case 'book-meta book-edition':
-									$item['Edition'] = str_replace(array(' ', 'Â','Edition'), '', $span->nodeValue);
+									$item['Edition'] = str_replace(array(' ', '\C2','Edition'), '', $span->nodeValue);
 									break;
 								case 'book-price-new':
 									$item['Bookstore_Price'] = $span->nodeValue;
@@ -1192,17 +1192,19 @@ function get_classes_and_items_from_bn($valuesArr)
 	
 	$referer = $url . 'TBWizardView?catalogId=10001&storeId='. $valuesArr['Store_Value'] .'&langId=-1';
 	
+			
+	//initiate a session and set the cookies (bn requires)
+	$ckfile = tempnam("../tmp", "CURLCOOKIE");
+	$ch = curl_init();
+	$options = array(CURLOPT_URL => $referer, CURLOPT_PROXY => PROXY_2, CURLOPT_PROXYUSERPWD => PROXY_2_AUTH, CURLOPT_COOKIEJAR => $ckfile, CURLOPT_RETURNTRANSFER => true);
+	curl_setopt_array($ch, $options);
+	
+	$output = curl_exec($ch);
+	
 	if (!isset($valuesArr['Class_ID']))
 	{
-		//make initialization request if they don't have a session yet...
-		curl_request(array(CURLOPT_URL => $valuesArr['Storefront_URL'], CURLOPT_COOKIESESSION => true, CURLOPT_PROXY => PROXY_2, CURLOPT_PROXYUSERPWD => PROXY_2_AUTH));
-		
-		//pt 2 of initialization is requesting the textbook lookup page
-		$options = array(CURLOPT_URL => $referer, CURLOPT_PROXY => PROXY_2, CURLOPT_PROXYUSERPWD => PROXY_2_AUTH);
-		
-		$response = curl_request($options);
-		
-		if (!$response)
+	
+		if (!$output)
 		{
 			throw new Exception('Failed to initialize the BN session with values '. print_r($valuesArr, true));
 		}
@@ -1213,7 +1215,7 @@ function get_classes_and_items_from_bn($valuesArr)
 			//We're doing this Multiple_Campuses thing for now, until we improve the system..
 			if ($valuesArr['Multiple_Campuses'] == 'Y') //they have a campus dropdown.
 			{
-				$url .= 'TextBookProcessDropdownsCmd?campusId='. $valuesArr['Campus_Value'] .'&termId=&deptId=&courseId=&sectionId=&storeId='. $valuesArr['Store_Value'] .'&catalogId=10001&langId=-1&dojo.transport=xmlhttp&dojo.preventCache='. time();
+				$url .= 'TextBookProcessDropdownsCmd?campusId='. $valuesArr['Campus_Value'] .'&termId=&deptId=&courseId=&sectionId=&storeId='. $valuesArr['Store_Value'] .'&catalogId=10001&langId=-1&dojo.transport=xmlhttp&dojo.preventCache='. intval(microtime(true)*1000);
 			}
 			else
 			{
@@ -1222,18 +1224,18 @@ function get_classes_and_items_from_bn($valuesArr)
 		}
 		else if (!isset($valuesArr['Department_ID']))
 		{
-			$url .= 'TextBookProcessDropdownsCmd?campusId='. $valuesArr['Campus_Value'] .'&termId='. $valuesArr['Term_Value'] .'&deptId=&courseId=&sectionId=&storeId='. $valuesArr['Store_Value'] .'&catalogId=10001&langId=-1&dojo.transport=xmlhttp&dojo.preventCache='. time();
+			$url .= 'TextBookProcessDropdownsCmd?campusId='. $valuesArr['Campus_Value'] .'&termId='. $valuesArr['Term_Value'] .'&deptId=&courseId=&sectionId=&storeId='. $valuesArr['Store_Value'] .'&catalogId=10001&langId=-1&dojo.transport=xmlhttp&dojo.preventCache='. intval(microtime(true)*1000);
 		}
 		else if (!isset($valuesArr['Course_ID']))
 		{
-			$url .= 'TextBookProcessDropdownsCmd?campusId='. $valuesArr['Campus_Value'] .'&termId='. $valuesArr['Term_Value'] .'&deptId='. $valuesArr['Department_Value'] .'&courseId=&sectionId=&storeId='. $valuesArr['Store_Value'] . '&catalogId=10001&langId=-1&dojo.transport=xmlhttp&dojo.preventCache='. time();
+			$url .= 'TextBookProcessDropdownsCmd?campusId='. $valuesArr['Campus_Value'] .'&termId='. $valuesArr['Term_Value'] .'&deptId='. $valuesArr['Department_Value'] .'&courseId=&sectionId=&storeId='. $valuesArr['Store_Value'] . '&catalogId=10001&langId=-1&dojo.transport=xmlhttp&dojo.preventCache='. intval(microtime(true)*1000);
 		}
 		else if (!isset($valuesArr['Class_ID']))
 		{
-			$url .= 'TextBookProcessDropdownsCmd?campusId='. $valuesArr['Campus_Value'] .'&termId='. $valuesArr['Term_Value'] .'&deptId='. $valuesArr['Department_Value'] .'&courseId='. $valuesArr['Course_Value'] .'&sectionId=&storeId='. $valuesArr['Store_Value'] . '&catalogId=10001&langId=-1&dojo.transport=xmlhttp&dojo.preventCache='. time();
+			$url .= 'TextBookProcessDropdownsCmd?campusId='. $valuesArr['Campus_Value'] .'&termId='. $valuesArr['Term_Value'] .'&deptId='. $valuesArr['Department_Value'] .'&courseId='. $valuesArr['Course_Value'] .'&sectionId=&storeId='. $valuesArr['Store_Value'] . '&catalogId=10001&langId=-1&dojo.transport=xmlhttp&dojo.preventCache='. intval(microtime(true)*1000);
 		}
 		
-		$options = array(CURLOPT_URL => $url, CURLOPT_REFERER => $referer, CURLOPT_PROXY => PROXY_2, CURLOPT_PROXYUSERPWD => PROXY_2_AUTH);
+		$options = array(CURLOPT_URL => $url, CURLOPT_REFERER => $referer, CURLOPT_PROXY => PROXY_2, CURLOPT_PROXYUSERPWD => PROXY_2_AUTH, CURLOPT_RETURNTRANSFER => true, CURLOPT_COOKIEFILE => $ckfile);
 	}
 	else //prepare the class-items query
 	{
@@ -1244,12 +1246,13 @@ function get_classes_and_items_from_bn($valuesArr)
 		
 		$postdata = 'storeId='. $valuesArr['Store_Value'] .'&langId=-1&catalogId=10001&savedListAdded=true&clearAll=&viewName=TBWizardView&removeSectionId=&mcEnabled=N&section_1='. $valuesArr['Class_Value'] .'&numberOfCourseAlready=0&viewTextbooks.x='. $x .'&viewTextbooks.y='. $y .'&sectionList=newSectionNumber';//get the class-book data.
 		
-		//$options = array(CURLOPT_URL => $url .'TBListView', CURLOPT_REFERER => $referer, CURLOPT_POST => true, CURLOPT_POSTFIELDS => $postdata);
-		$options = array(CURLOPT_URL => $url .'TBListView', CURLOPT_REFERER => $referer, CURLOPT_POST => true, CURLOPT_POSTFIELDS => $postdata, CURLOPT_PROXY => PROXY_2, CURLOPT_PROXYUSERPWD => PROXY_2_AUTH);
+		//turns out we can just issue a GET request, might need to post if bn revises
+		$options = array(CURLOPT_URL => $url .'TBListView?' . $postdata, CURLOPT_REFERER => $referer, CURLOPT_PROXY => PROXY_2, CURLOPT_PROXYUSERPWD => PROXY_2_AUTH, CURLOPT_RETURNTRANSFER => true, CURLOPT_COOKIEFILE => $ckfile);
 	}
-	
-	$response = curl_request($options);
-	
+
+	curl_setopt_array($ch, $options);
+	$response = curl_exec($ch);
+	curl_close($ch);
 	
 	if (!$response)
 	{
