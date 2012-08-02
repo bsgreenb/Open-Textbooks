@@ -27,3 +27,7 @@ There's a lot of ways this project could be improved.  Some of these tasks don't
 ## Contact Info
 
 Contact me at ben@textyard.com with any questions.  I'm happy to help with whatever!
+
+## Additional Resources
+
+* Getchabooks has open-sourced their code base, which includes a complete textbook comparison site with scraping of Barnes and Nobles and Follett stores.  https://github.com/getchabooks/getchabooks
