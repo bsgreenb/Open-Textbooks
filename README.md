@@ -24,9 +24,13 @@ There's a lot of ways this project could be improved.  Some of these tasks don't
 * Help keep the scrapers up to date, as the bookstore software changes every couple of years.
 * Find any bugs in the code.  I'm sure there are some, and there are definitely lots of places where the code can be simplified/improved. 
 
-## Contact Info
+## Contact Info / Support
 
-Contact me at ben@textyard.com with any questions.  I'm happy to help with whatever!
+Contact me at ben@textyard.com with any questions.  I'm happy to help with whatever.  If you're going to contact me for help with fixing bugs, please provide the following info (if you don't know how to provide this info, let me know I can point you in the right direction):
+
+1. Verification that your proxy config is working. 
+2. A complete description of when the bug happens.   Does it happen with all schools, just schools of this type,  or does it only happen for a particular set of schools?  Does the issue depend on whether you access the data with the browser vs. my code?  Does the issue depend on whether your proxy is enabled?
+3. Complete cURL HTTP request/response logs and side-by-side complete browser HTTP request/response logs (from Chrome Dev Tools or Firebug).
 
 ## Additional Resources
 
