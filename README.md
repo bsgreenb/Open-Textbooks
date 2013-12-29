@@ -8,7 +8,7 @@ You'll see in the content/ folder that I included api.php.  That's a REST API th
 
 ## Documentation
 
-See the [Wiki](https://github.com/bsgreenb/Open-Textbooks/wiki) which explains clearly how all the scrapers work, and how they avoid the anti-scraping techniques employed by the 6 major bookstore website technologies.  Additionally, it explains how to add new schools for every bookstore type. I've also added a section on the legality of the scrapers (IMPORTANT DISCLAIMER: I AM NOT A LAWYER AND I AM NOT RESPONSIBLE FOR YOU FOLLOWING THE LEGAL OPINIONS IN THERE.) 
+See the [Wiki](https://github.com/bsgreenb/Open-Textbooks/wiki) which explains clearly how all the scrapers work, and how they avoid the anti-scraping techniques employed by the 6 major bookstore website technologies.  Additionally, it explains how to add new schools for every bookstore type. I've also added a section on the legality of the scrapers.
 
 ## Open-Source Volunteering Opportunities
 
@@ -19,9 +19,9 @@ There's a lot of ways this project could be improved.  Some of these tasks don't
 * Help keep the scrapers up to date, as the bookstore software changes every couple of years.
 * Find any bugs in the code.  I'm sure there are some, and there are definitely lots of places where the code can be simplified/improved. 
 
-## Contact Info / Support
+## Posting bugs/issues
 
-Contact me at bsgreenb@gmail.com with any questions.  I'm happy to help with whatever.  If you're going to contact me for help with fixing bugs, please provide the following info (if you don't know how to provide this info, let me know I can point you in the right direction):
+Please try and provide this info:
 
 1. Verification that your proxy config is working. 
 2. A complete description of when the bug happens.   Does it happen with all schools, just schools of this type,  or does it only happen for a particular set of schools?  Does the issue depend on whether you access the data with the browser vs. my code?  Does the issue depend on whether your proxy is enabled?
